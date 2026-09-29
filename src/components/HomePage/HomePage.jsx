@@ -1,0 +1,36 @@
+import React, { useEffect, useState } from 'react'
+import { getWishListItems } from '../../utils/WishListDB'
+import ItemCard from '../ItemCard/ItemCard'
+import './HomePage.css'
+
+const HomePage = () => {
+  const [wishlist, setWishlist] = useState([])
+
+  useEffect(() => {
+    async function loadWishlist() {
+      try {
+        const docs = await getWishListItems()
+        setWishlist(docs)
+      } catch (err) {
+        console.error('Failed to load wishlist:', err)
+      }
+    }
+
+    loadWishlist()
+  }, [])
+
+  return (
+    <div className='wishlist-container'>
+      <div className='title'>
+        <p>Wish List</p>
+      </div>
+      <div className='wishlist-grid'>
+        {wishlist.map((item) => (
+                <ItemCard key={item.id} itemId={item.itemId} dateAdded={item.dateAdded} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default HomePage
