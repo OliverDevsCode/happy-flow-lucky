@@ -6,8 +6,7 @@ import './HomePage.css'
 const HomePage = () => {
   const [wishlist, setWishlist] = useState([])
 
-  useEffect(() => {
-    async function loadWishlist() {
+  async function loadWishlist() {
       try {
         const docs = await getWishListItems()
         setWishlist(docs)
@@ -16,6 +15,8 @@ const HomePage = () => {
       }
     }
 
+  useEffect(() => {
+    
     loadWishlist()
   }, [])
 
@@ -29,6 +30,7 @@ const HomePage = () => {
                 <ItemCard key={item.id} itemId={item.itemId} dateAdded={item.dateAdded} />
         ))}
       </div>
+      <button onClick={loadWishlist}>Refresh</button>
     </div>
   )
 }

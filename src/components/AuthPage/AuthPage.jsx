@@ -80,35 +80,38 @@ const handleDelete = async (itemId) => {
 
   return (
     <div className='admin-panel'>
-      <p>Admin Page</p>
+      <p>Admin Dashboard</p>
+
       <div className='current-wishlist'>
         <p>Live WishList</p>
         <div className='wishlist-grid'>
-        {wishlist.map((item) => (
-              <div className='admin-item'>
-                <ItemCard key={item.id} itemId={item.itemId} dateAdded={item.dateAdded}/>
-                <button onClick={()=>{handleRemove(item)}}>Remove from Wishlist</button>
-              </div>
-        ))}
+          {wishlist.map((item) => (
+            <div key={item.id || item.itemId} className='admin-item'>
+              <ItemCard itemId={item.itemId} dateAdded={item.dateAdded} />
+              <button onClick={() => handleRemove(item)}>Remove from Wishlist</button>
+            </div>
+          ))}
         </div>
       </div>
+
       <div className='item-catalogue'>
         <p>All Items</p>
-        {itemList.map((item) => (
-          <div className='admin-item'>
-              <ItemCard key={item.id} itemId={item.id} dateAdded={item.dateAdded}/>
-              <>
-                <button onClick={()=>{handleAdd(item)}}>Add to Wishlist</button>
-                <button onClick={()=>{}}>Delete Item From Invetory</button>
-              </>
-          </div>
-        ))}
+        <div className='item-catalogue-grid'>
+          {itemList.map((item) => (
+            <div key={item.id} className='admin-item'>
+              <ItemCard itemId={item.id} dateAdded={item.dateAdded} />
+              <button onClick={() => handleAdd(item)}>Add to Wishlist</button>
+              <button onClick={() => handleDelete(item.id)}>Delete Item</button>
+            </div>
+          ))}
+        </div>
       </div>
+
       <div className='create-container'>
-        <CreateItem></CreateItem>
+        <CreateItem />
       </div>
     </div>
-  )
+  );
 }
 
 export default AuthPage

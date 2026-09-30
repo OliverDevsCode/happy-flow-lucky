@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './CreateItem.css'
 import ItemCard from '../ItemCard/ItemCard';
+import { addItem } from '../../utils/itemDB';
 
 
 const CreateItem = () => {
@@ -14,6 +15,13 @@ const CreateItem = () => {
   useEffect(() => {
     setImgFailed(false);
   }, [image_url]);
+
+  async function handleCreate(){
+    //add to database
+    await addItem(title,notes,image_url);
+    //refresh page
+    window.location.reload();
+  }
   
 
   useEffect(() => {
@@ -38,6 +46,7 @@ const CreateItem = () => {
         <input type='text' placeholder='title' value={title} onChange={(e)=>{setTitle(e.target.value)}}></input>
         <input type='text' placeholder='notes' value={notes} onChange={(e)=>{setNotes(e.target.value)}}></input>
         <input type='text' placeholder='bg image url' value={image_url} onChange={(e)=>{setImage_url(e.target.value)}}></input>
+        <button onClick={handleCreate}>Add to Inventory</button>
       </div>
       <div className='preview-container'>
         <p>Preview</p>
@@ -62,6 +71,7 @@ const CreateItem = () => {
           <span className='item-card__date'>Added {formatedDate}</span>
         )}
       </div>
+      
       
     </article>
       </div>
