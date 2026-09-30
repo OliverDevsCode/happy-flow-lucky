@@ -4,7 +4,7 @@ import { removeFromWishList } from '../../utils/WishListDB'
 import { addToWishList } from '../../utils/WishListDB'
 import './ItemCard.css'
 
-const ItemCard = ({ itemId , dateAdded, admin, wishlist}) => {
+const ItemCard = ({ itemId , dateAdded, admin, wishlist ,onChange}) => {
   const [item, setItem] = useState(null)
   const [loading, setLoading] = useState(true)
   const [imgFailed, setImgFailed] = useState(false)
@@ -14,7 +14,7 @@ const ItemCard = ({ itemId , dateAdded, admin, wishlist}) => {
     let cancelled = false
 
     if (dateAdded) {
-  setFormattedDate(
+    setFormattedDate(
     dateAdded.toDate().toLocaleDateString('en-GB', {
       day: 'numeric',
       month: 'short',
@@ -77,20 +77,7 @@ const ItemCard = ({ itemId , dateAdded, admin, wishlist}) => {
           <span className='item-card__date'>Added {formatedDate}</span>
         )}
       </div>
-      {admin === true && (
-        <div className='item-options'>
-          {wishlist === true && (
-            <button onClick={()=>{removeFromWishList(itemId)}}>Remove from Wishlist</button>
-          )}
-          {wishlist === false && (
-            <>
-              <button onClick={()=>{addToWishList(itemId)}}>Add to Wishlist</button>
-              <button>Delete Item From Invetory</button>
-            </>
-          )}
-          
-        </div>
-      )}
+      
     </article>
   )
 }
