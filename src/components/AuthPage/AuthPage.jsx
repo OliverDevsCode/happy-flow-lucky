@@ -3,7 +3,7 @@ import { useAuth } from '../../contexts/authContext'
 import { getWishListItems } from '../../utils/WishListDB';
 import { removeFromWishList } from '../../utils/WishListDB';
 import { addToWishList } from '../../utils/WishListDB';
-import { getAllItems } from '../../utils/itemDB';
+import { deleteItem, getAllItems } from '../../utils/itemDB';
 import ItemCard from '../ItemCard/ItemCard';
 import { useNavigate } from 'react-router-dom';
 
@@ -76,6 +76,7 @@ const handleRemove = async (item) => {
 const handleDelete = async (itemId) => {
   setItemList((prev) => prev.filter((i) => i.id !== itemId));
   setWishlist((prev) => prev.filter((w) => w.itemId !== itemId));
+  await deleteItem(itemId);
 };
 
   return (

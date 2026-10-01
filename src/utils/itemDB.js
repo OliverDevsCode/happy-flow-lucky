@@ -1,6 +1,6 @@
 import firebase from "firebase/compat/app";
 import { db } from "./firebaseConfig";
-import {addDoc, collection, doc, getDoc,getDocs } from "firebase/firestore";  
+import {addDoc, collection, deleteDoc, doc, getDoc,getDocs } from "firebase/firestore";  
 
 async function addItem(title,notes,image_url){
   try {
@@ -12,6 +12,14 @@ async function addItem(title,notes,image_url){
 
     await addDoc(collection(db,"items"),itemToAdd);
     console.log("added to items");
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function deleteItem(itemId) {
+  try {
+    await deleteDoc(doc(db,"items",itemId));
   } catch (error) {
     console.error(error);
   }
@@ -54,4 +62,4 @@ async function getAllItems(){
     return items;
 }
 
-export {getItem,getAllItems,addItem};
+export {getItem,getAllItems,addItem,deleteItem};
