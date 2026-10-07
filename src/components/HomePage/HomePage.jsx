@@ -10,6 +10,7 @@ const HomePage = () => {
       try {
         const docs = await getWishListItems()
         setWishlist(docs)
+        console.log('Wishlist loaded:', docs)
       } catch (err) {
         console.error('Failed to load wishlist:', err)
       }
@@ -27,7 +28,7 @@ const HomePage = () => {
       </div>
       <div className='wishlist-grid'>
         {wishlist.map((item) => (
-                <ItemCard key={item.id} itemId={item.itemId} dateAdded={item.dateAdded} />
+                <ItemCard key={item.id} itemId={item.itemId} dateAdded={item.dateAdded} progress={item.progress} target={item.target}/>
         ))}
       </div>
       <button onClick={loadWishlist}>Refresh</button>

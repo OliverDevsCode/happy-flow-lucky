@@ -4,7 +4,7 @@ import { removeFromWishList } from '../../utils/WishListDB'
 import { addToWishList } from '../../utils/WishListDB'
 import './ItemCard.css'
 
-const ItemCard = ({ itemId , dateAdded, admin, wishlist ,onChange}) => {
+const ItemCard = ({ itemId , dateAdded, admin, wishlist ,onChange,progress,target}) => {
   const [item, setItem] = useState(null)
   const [loading, setLoading] = useState(true)
   const [imgFailed, setImgFailed] = useState(false)
@@ -75,6 +75,15 @@ const ItemCard = ({ itemId , dateAdded, admin, wishlist ,onChange}) => {
         {item.notes && <p className='item-card__notes'>{item.notes}</p>}
         {formatedDate && (
           <span className='item-card__date'>Added {formatedDate}</span>
+        )}
+      </div>
+
+      <div className ="progress-container">
+        {progress && target && (
+          <div className='progress-bar'>
+            <p>Goal: {progress} / {target}</p>
+            <progress value={progress} max={target}></progress>
+          </div>
         )}
       </div>
       
