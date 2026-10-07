@@ -102,6 +102,7 @@ const handleDelete = async (itemId) => {
             <div key={item.id} className='admin-item'>
               <ItemCard itemId={item.id} dateAdded={item.dateAdded} />
               <button onClick={() => handleAdd(item)}>Add to Wishlist</button>
+              {/* //add modal that lets you edit the target for the item */}
               <button onClick={() => handleDelete(item.id)}>Delete Item</button>
             </div>
           ))}
