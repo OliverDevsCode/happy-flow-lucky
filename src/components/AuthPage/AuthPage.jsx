@@ -22,6 +22,8 @@ const AuthPage = () => {
   const [showPopUp,setShowPopUp] = useState(false);
   const [selectedItem,setSelectedItem] = useState({});
 
+  const [clicks,setClicks] = useState(0);
+
   useEffect(() => {
 
     if(!userLoggedIn){
@@ -54,6 +56,14 @@ const AuthPage = () => {
       const newState = !showPopUp;
       setShowPopUp(newState);
   }
+
+  const updateClicks = () =>{
+    const newClick = clicks + 1;
+    setClicks(newClick);
+    if(newClick >= 3){
+      navigate('/');
+    }
+  };
 
 
   const handleAdd = async (item) => {
@@ -94,7 +104,7 @@ const handleDelete = async (itemId) => {
       {showPopUp && (
         <ItemOptionsPopUp item={selectedItem} onClose={setItemPopUp}></ItemOptionsPopUp>
       )}
-      <p>Admin Dashboard</p>
+      <p onClick={updateClicks}>Admin Dashboard</p>
 
       <div className='current-wishlist'>
         <p>Live WishList</p>
