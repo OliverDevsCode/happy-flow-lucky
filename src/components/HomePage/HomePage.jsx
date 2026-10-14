@@ -43,7 +43,7 @@ const HomePage = () => {
                 <ItemCard key={item.id} itemId={item.itemId} dateAdded={item.dateAdded} progress={item.progress} target={item.target}/>
         ))}
       </div>
-      <button onClick={loadWishlist}>Refresh</button>
+      <button className='refresh-button' onClick={loadWishlist}>Refresh</button>
     </div>
   )
 }
