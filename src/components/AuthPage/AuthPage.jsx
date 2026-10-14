@@ -101,18 +101,9 @@ const handleDelete = async (itemId) => {
         <div className='wishlist-grid'>
           {wishlist.map((item) => (
             <div key={item.id || item.itemId} className='admin-item'>
-              <ItemCard itemId={item.itemId} dateAdded={item.dateAdded} />
+              <ItemCard itemId={item.itemId} dateAdded={item.dateAdded} target={item.target} progress={item.progress}/>
+              <button onClick={()=>{setSelectedItem(item);setItemPopUp();}}>Items Option Progress</button>
               <button onClick={() => handleRemove(item)}>Remove from Wishlist</button>
-              {item.progress && item.target && (
-                <div>
-                    <div className='progress-bar'>
-                      <p>Goal: {item.progress} / {item.target}</p>
-                    </div>
-                    <div>
-                      <button onClick={()=>{setSelectedItem(item);setItemPopUp();}}>Items Option Progress</button>
-                    </div>
-                </div>
-                  )}
             </div>
           ))}
         </div>

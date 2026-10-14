@@ -85,6 +85,11 @@ const ItemCard = ({ itemId , dateAdded, admin, wishlist ,onChange,progress,targe
             <progress value={progress} max={target}></progress>
           </div>
         )}
+        {!progress && !target && (
+          <div className='progress-bar'>
+            <p>No Current Target</p>
+          </div>
+        )}
       </div>
       
     </article>

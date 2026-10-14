@@ -12,18 +12,21 @@ const ItemOptionsPopUp = ({ item, onClose }) => {
     },[])
 
    const updateProgress = async() => {
+        //perhaps add error handling 
         await updateProgressField(item.id,progress);
         item.progress = progress;
     };
 
     const incrementProgress = async() => {
-        const newValue = progress + 1;
+        //perhaps add error handling 
+        const newValue = parseInt(progress) + 1;
         await updateProgressField(item.id,newValue);
         item.progress = newValue;
         setProgress(newValue);
     };
 
     const updateTarget = async() => {
+        //perhaps add error handling 
         await updateTargetField(item.id,target);
         item.target = target;
     };
@@ -39,7 +42,7 @@ const ItemOptionsPopUp = ({ item, onClose }) => {
                 <div className="update-progress">
                     <input placeholder="Change progress" value={progress} onChange={(e)=>{setProgress(e.target.value)}}></input>
                     <button onClick={updateProgress}>Set Amount</button>
-                    <button>Increment One</button>
+                    <button onClick={incrementProgress}>Increment By One</button>
                 </div>
                 <button onClick={onClose}>Close PopUp</button>
             </div>
