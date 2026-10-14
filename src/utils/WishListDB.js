@@ -17,6 +17,10 @@ async function getWishListItems(){
   return items;
 }
 
+/**
+ * Add item to wishlist
+ * @param {*} itemId - the firestore Id of the item you wish to add to the wishlist collection
+ */
 async function addToWishList(itemId){
   console.log("Adding",itemId)
   await setDoc(doc(db, 'wishlist', itemId), {
@@ -25,6 +29,11 @@ async function addToWishList(itemId){
   })
 }
 
+/**
+ * Remove an Item from the wishlist collection
+ * @param {*} delete_id - firestore ID of the item you wish to delete
+ * @returns - will return if document did exist
+ */
 async function removeFromWishList(delete_id) {
   const q = query(collection(db, 'wishlist'), where('itemId', '==', delete_id))
   const snapshot = await getDocs(q)
@@ -36,6 +45,11 @@ async function removeFromWishList(delete_id) {
   await batch.commit()
 }
 
+/**
+ * Change progress value stored in the wishlist collection
+ * @param {*} itemId - firestore ID of the item you wish to update
+ * @param {*} newValue - value you want to update the database value too
+ */
 async function updateProgressField(itemId,newValue){
   try {
     const itemRef = doc(db,"wishlist",itemId);
@@ -48,6 +62,11 @@ async function updateProgressField(itemId,newValue){
   
 }
 
+/**
+ * Change Target value stored in the wishlist database
+ * @param {*} itemId - ID of the item you wish to update
+ * @param {*} newValue - value you want to update the database value too
+ */
 async function updateTargetField(itemId,newValue){
   try {
     const itemRef = doc(db,"wishlist",itemId);
