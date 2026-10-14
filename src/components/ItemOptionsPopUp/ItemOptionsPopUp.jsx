@@ -35,16 +35,19 @@ const ItemOptionsPopUp = ({ item, onClose }) => {
     return (
         <div className="item-options-popup">
             <div className="popup-content">
+                <p className="options-text">Options for the item</p>
+                <p>Target Options</p>
                 <div className="update-target">
                     <input placeholder="Change target" value={target} onChange={(e) => { setTarget(e.target.value) }}></input>
                     <button onClick={updateTarget}>Update Target</button>
                 </div>
+                <p>Progress Options</p>
                 <div className="update-progress">
                     <input placeholder="Change progress" value={progress} onChange={(e)=>{setProgress(e.target.value)}}></input>
                     <button onClick={updateProgress}>Set Amount</button>
                     <button onClick={incrementProgress}>Increment By One</button>
                 </div>
-                <button onClick={onClose}>Close PopUp</button>
+                <button className="close-button" onClick={onClose}>Close PopUp</button>
             </div>
         </div>
     )

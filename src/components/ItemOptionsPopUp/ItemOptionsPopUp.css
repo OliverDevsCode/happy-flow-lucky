@@ -1,7 +1,7 @@
 .item-options-popup {
   position: fixed;
   inset: 0;
-  background: rgba(85, 68, 115, 0.4);
+  background: rgba(187, 140, 195, 0.4);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -23,10 +23,28 @@
   animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.item-options-popup .popup-content .close-button {
+    background-color: var(--lavender-dark);
+    opacity: 95%;
+    color: white;
+
+}
+
+.item-options-popup .popup-content .close-button:hover{
+    background-color:rgb(177, 35, 35);
+    scale: 1.05;
+    color: black;
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.options-text {
+    font-weight: bolder;
+}
+
 .update-target,
 .update-progress {
   display: flex;
-  flex-direction: column;
+  flex-direction:row;
   gap: 0.6rem;
   width: 100%;
 }
@@ -97,6 +115,7 @@
   background: rgba(142, 115, 184, 0.08);
   color: var(--lavender-dark);
 }
+
 
 @keyframes fadeIn {
   from { opacity: 0; }
