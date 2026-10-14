@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { getWishListItems } from '../../utils/WishListDB'
 import ItemCard from '../ItemCard/ItemCard'
 import './HomePage.css'
+import { useNavigate } from 'react-router-dom'
 
 const HomePage = () => {
   const [wishlist, setWishlist] = useState([])
+  const [clicks,setClicks] = useState(0);
+
+  const navigate = useNavigate();
 
   async function loadWishlist() {
       try {
@@ -21,10 +25,18 @@ const HomePage = () => {
     loadWishlist()
   }, [])
 
+  const updateClicks = () =>{
+    const newClick = clicks + 1;
+    setClicks(newClick);
+    if(newClick >= 3){
+      navigate('/admin');
+    }
+  };
+
   return (
     <div className='wishlist-container'>
       <div className='title'>
-        <p>Wish List</p>
+        <p onClick={updateClicks}>Wish List</p>
       </div>
       <div className='wishlist-grid'>
         {wishlist.map((item) => (
