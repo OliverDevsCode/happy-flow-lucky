@@ -82,7 +82,7 @@ const ItemCard = ({ itemId , dateAdded, admin, wishlist ,onChange,progress,targe
         {progress && target && (
           <div className='progress-bar'>
             <p>Goal: {progress} / {target}</p>
-            <progress value={progress} max={target}></progress>
+            <progress className='live-bar' value={progress} max={target}></progress>
           </div>
         )}
         {!progress && !target && (

@@ -86,6 +86,24 @@
   text-align: center;
 }
 
+.progress-container .live-bar {
+  background: #eee; /* your track color */
+}
+
+.progress-container .live-bar::-webkit-progress-bar {
+  background: #eee;
+  border-radius: 999px;
+}
+
+.progress-container .live-bar::-webkit-progress-value {
+  background: var(--lavender-dark);
+  border-radius: 999px;
+}
+
+.progress-container .live-bar::-moz-progress-bar {
+  background: var(--lavender-dark);
+  border-radius: 999px;
+}
 .progress-container p {
   font-weight: bold;
 }
