@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 import "./AuthPage.css"
 import CreateItem from '../CreateItem/CreateItem';
+import ItemOptionsPopUp from '../ItemOptionsPopUp/ItemOptionsPopUp';
 
 const AuthPage = () => {
 
@@ -18,11 +19,15 @@ const AuthPage = () => {
   const [wishlist, setWishlist] = useState([]);
   const [itemList,setItemList] = useState([]);
 
+  const [showPopUp,setShowPopUp] = useState(false);
+  const [selectedItem,setSelectedItem] = useState({});
+
   useEffect(() => {
 
     if(!userLoggedIn){
       navigate('/login');
     }
+
 
     async function loadWishlist() {
       console.log("getting wishlist");
@@ -44,6 +49,11 @@ const AuthPage = () => {
 
     loadWishlist()
   }, [])
+
+  const setItemPopUp = () => {
+      const newState = !showPopUp;
+      setShowPopUp(newState);
+  }
 
 
   const handleAdd = async (item) => {
@@ -81,6 +91,9 @@ const handleDelete = async (itemId) => {
 
   return (
     <div className='admin-panel'>
+      {showPopUp && (
+        <ItemOptionsPopUp item={selectedItem} onClose={setItemPopUp}></ItemOptionsPopUp>
+      )}
       <p>Admin Dashboard</p>
 
       <div className='current-wishlist'>
@@ -90,6 +103,16 @@ const handleDelete = async (itemId) => {
             <div key={item.id || item.itemId} className='admin-item'>
               <ItemCard itemId={item.itemId} dateAdded={item.dateAdded} />
               <button onClick={() => handleRemove(item)}>Remove from Wishlist</button>
+              {item.progress && item.target && (
+                <div>
+                    <div className='progress-bar'>
+                      <p>Goal: {item.progress} / {item.target}</p>
+                    </div>
+                    <div>
+                      <button onClick={()=>{setSelectedItem(item);setItemPopUp();}}>Items Option Progress</button>
+                    </div>
+                </div>
+                  )}
             </div>
           ))}
         </div>

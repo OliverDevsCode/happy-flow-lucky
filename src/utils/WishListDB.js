@@ -1,6 +1,6 @@
 import { timestampAdd } from "firebase/firestore/pipelines";
 import { db } from "./firebaseConfig";
-import { collection, doc, getDocs,query,writeBatch ,where, setDoc, serverTimestamp } from "firebase/firestore";
+import { collection, doc, getDocs,query,writeBatch ,where, setDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 
 
 /**
@@ -36,4 +36,28 @@ async function removeFromWishList(delete_id) {
   await batch.commit()
 }
 
-export {getWishListItems,removeFromWishList,addToWishList};
+async function updateProgressField(itemId,newValue){
+  try {
+    const itemRef = doc(db,"wishlist",itemId);
+    await updateDoc(itemRef,{
+      progress: newValue
+    });
+  } catch (error) {
+    console.error("couldn't update doc",error);
+  }
+  
+}
+
+async function updateTargetField(itemId,newValue){
+  try {
+    const itemRef = doc(db,"wishlist",itemId);
+    await updateDoc(itemRef,{
+      target: newValue
+    });
+  } catch (error) {
+    console.error("couldnt update target",error);
+  }
+}
+
+
+export {getWishListItems,removeFromWishList,addToWishList,updateProgressField,updateTargetField};
